@@ -8,7 +8,7 @@ import {
 } from '../ducks/ranges'
 
 export function useFetchRanges() {
-    const url = 'https://real-estate-api-ndtm7xbgda-uc.a.run.app/features_info'
+    const url = '/features_info'
     const [data, dispatch] = useReducer(rangesReducer, initialState)
     useEffect(() => {
         axios.get(url)

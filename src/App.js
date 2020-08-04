@@ -33,7 +33,7 @@ function App() {
       </div>
       <div className="container p-5" ref={myRef}>{content}</div>
       <footer>
-        <Row>
+        <Row className="mx-0">
           <Col xs="12" className="py-5">
             <p>Jorge Almonacid - 2020</p>
           </Col>
