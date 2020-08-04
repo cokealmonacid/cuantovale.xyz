@@ -2,7 +2,6 @@
   "name": "cuantovale.xyz",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://real-estate-api-ndtm7xbgda-uc.a.run.app",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
