@@ -9,7 +9,7 @@ import {setData} from '../helpers'
 
 export function fetchEvaluates(values, dispatch) {
     fetchLoading()
-    const url = '/predict'
+    const url = 'https://real-estate-api-ndtm7xbgda-uc.a.run.app/predict'
     const data = setData(values)
     axios.post(url, data)
     .then(response => dispatch(fetchSuccess(response.data)))
