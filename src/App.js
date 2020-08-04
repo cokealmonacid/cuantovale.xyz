@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useReducer } from 'react';
 import { Button, Col, Row} from 'reactstrap'
+import { fetchEvaluates } from './customHooks/evaluates'
+import { initialState, evaluateReducer, clean } from './ducks/evaluates'
+import {Error, LoadingPrice, Price, ValidationForm} from './components'
 import logo from './assets/dollar.png'
-import { useFetchRanges } from './customHooks/ranges'
-import {Error, LoadingSpinner, ValidationForm} from './components'
 import './App.css'
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
@@ -10,9 +11,12 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 function App() {
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
-  const {data, loading, error} = useFetchRanges()
-  if (loading) return <LoadingSpinner />
-  if (error) return <Error message={error}/>
+  const [{loading, error, data}, dispatch] = useReducer(evaluateReducer, initialState)
+  const handleSubmit = values => fetchEvaluates(values, dispatch)
+  let content = <ValidationForm handleValue={handleSubmit}/>
+  if (loading) content = <LoadingPrice />
+  if (error) content = <Error />
+  if (data && data.precio) content = <Price price={data.precio} again={() => dispatch(clean())}/>
   return (
     <>
       <div className="main">
@@ -27,12 +31,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="container p-5" ref={myRef}>
-        <h2 className="mb-2">Valoriza tu propiedad</h2>
-        <p>Ingresa la siguiente información acerca de tu propiedad y de esta forma,<br/>
-        calcularemos el valor utilizando nuestro modelo <br />de machine learning</p>
-        <ValidationForm data={data}/>
-      </div>
+      <div className="container p-5" ref={myRef}>{content}</div>
       <footer>
         <Row>
           <Col xs="12" className="py-5">

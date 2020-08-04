@@ -75,3 +75,8 @@ footer p {
   padding-top: 45vh;
   min-height: 100vh;
 }
+
+.value {
+  font-weight: bold;
+  font-size: 90px !important;
+}
