@@ -4,7 +4,8 @@ import {Col, Row, Button, Form, Input} from 'reactstrap'
 const ValidationForm = props => {
   const { numerical_features, categorical_features } = props
   const [comuna, tipo] = categorical_features
-  console.log(comuna)
+  console.log(comuna, tipo)
+  console.log(numerical_features)
   return (
     <Form className="my-4 w-50 mx-auto">
     <Row className="mb-3">
