@@ -2,6 +2,7 @@
   "name": "cuantovale.xyz",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://relaxed-bose-1f99cf.netlify.app/",
   "proxy": "https://real-estate-api-ndtm7xbgda-uc.a.run.app",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
