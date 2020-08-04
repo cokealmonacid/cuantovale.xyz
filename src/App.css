@@ -70,3 +70,8 @@ footer {
 footer p {
   color: #fff;
 }
+
+.content-loader{
+  padding-top: 45vh;
+  min-height: 100vh;
+}

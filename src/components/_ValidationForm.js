@@ -1,7 +1,11 @@
 import React from 'react'
 import {Col, Row, Button, Form, Input} from 'reactstrap'
 
-const ValidationForm = props => (
+const ValidationForm = props => {
+  const { numerical_features, categorical_features } = props
+  const [comuna, tipo] = categorical_features
+  console.log(comuna)
+  return (
     <Form className="my-4 w-50 mx-auto">
     <Row className="mb-3">
       <Col sm="6 d-flex justify-content-start">
@@ -73,6 +77,7 @@ const ValidationForm = props => (
     </Row>
     <Button color="info" className="evaluate-property mt-5" >Evaluar mi propiedad</Button>
   </Form>
-)
+  )
+}
 
 export default ValidationForm;

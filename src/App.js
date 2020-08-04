@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { Button, Col, Row} from 'reactstrap'
 import logo from './assets/dollar.png'
-import {ValidationForm} from './components'
+import { useFetchRanges } from './customHooks/ranges'
+import {Error, LoadingSpinner, ValidationForm} from './components'
 import './App.css'
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
@@ -9,7 +10,9 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 function App() {
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
-
+  const {data, loading, error} = useFetchRanges()
+  if (loading) return <LoadingSpinner />
+  if (error) return <Error message={error}/>
   return (
     <>
       <div className="main">
@@ -25,10 +28,10 @@ function App() {
         </div>
       </div>
       <div className="container p-5" ref={myRef}>
-        <h2 className="mt-5 mb-2">Valoriza tu propiedad</h2>
+        <h2 className="mb-2">Valoriza tu propiedad</h2>
         <p>Ingresa la siguiente información acerca de tu propiedad y de esta forma,<br/>
         calcularemos el valor utilizando nuestro modelo <br />de machine learning</p>
-        <ValidationForm />
+        <ValidationForm data={data}/>
       </div>
       <footer>
         <Row>
