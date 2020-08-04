@@ -7,6 +7,7 @@ import {jsUcfirst} from './../helpers'
 
 const ValidationForm = props => {
   const [value, setValue] = useState('default');
+  const [localError, setLocalError] = useState(null)
   const {data, loading, error} = useFetchRanges()
   const handleInputChange = (event) => {
     event.persist()
@@ -16,6 +17,11 @@ const ValidationForm = props => {
   if (loading) return <LoadingSpinner />
   if (error) return <Error message={error}/>
   const { numerical_features, categorical_features } = data
+  const validate = (values) => {
+    let total = numerical_features.length + categorical_features.length
+    if (total !== Object.keys(values).length) setLocalError('Todos los campos son obligatorios')
+    else props.handleValue(value)
+  }
   return (
     <>
     <h2 className="mb-2">Valoriza tu propiedad</h2>
@@ -47,8 +53,9 @@ const ValidationForm = props => {
           </Row>
         ))
       }
+      {localError && <p className="text-danger my-2">{localError}</p>}
       <Button color="info" className="evaluate-property mt-5" onClick={(e) => {e.preventDefault()
-      props.handleValue(value)}} type="submit">Evaluar mi propiedad</Button>
+      validate(value)}} type="submit">Evaluar mi propiedad</Button>
     </Form>
     </>
   )
